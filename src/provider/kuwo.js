@@ -63,7 +63,7 @@ const track = (id) => {
 	const url = crypto.kuwoapi
 		? 'http://mobi.kuwo.cn/mobi.s?f=kuwo&q=' +
 			crypto.kuwoapi.encryptQuery(
-				'corp=kuwo&source=kwplayerhd_ar_4.6.0.4_changanchengyongche_S111.apk&p2p=1&type=convert_url2&sig=0&format=' +
+				'corp=kuwo&source=kwplayerhd_ar_4.8.3.8_BYD_35.apk&p2p=1&type=convert_url2&sig=0&format=' +
 					['flac', 'mp3']
 						.slice(select.ENABLE_FLAC ? 0 : 1)
 						.join('|') +
