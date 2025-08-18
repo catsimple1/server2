@@ -21,7 +21,10 @@ function generateSign(str) {
 	str += `&timestamp=${currentTime}`;
 	const questionMarkIndex = str.indexOf('?');
 	const baseUrl = str.substring(0, questionMarkIndex);
-	const filteredChars = str.substring(questionMarkIndex + 1).replace(/[^a-zA-Z0-9]/g, '').split('');
+	const filteredChars = str
+		.substring(questionMarkIndex + 1)
+		.replace(/[^a-zA-Z0-9]/g, '')
+		.split('');
 	filteredChars.sort();
 	const dataToEncrypt = `kuwotest${filteredChars.join('')}${url.parse(baseUrl).path}`;
 	const md5 = crypto.createHash('md5').update(dataToEncrypt).digest('hex');
@@ -53,44 +56,47 @@ const search = (info) => {
 
 async function sendAdFreeRequest() {
 	const adurl =
-		"http://bd-api.kuwo.cn/api/service/advert/watch?uid=-1&token=&timestamp=1724306124436&sign=15a676d66285117ad714e8c8371691da";
+		'http://bd-api.kuwo.cn/api/service/advert/watch?uid=-1&token=&timestamp=1724306124436&sign=15a676d66285117ad714e8c8371691da';
 	const headers = {
-		"user-agent": "Dart/2.19 (dart:io)",
-		plat: "ar",
-		channel: "aliopen",
-		devid: "114514114514",
-		ver: "3.9.0",
-		host: "bd-api.kuwo.cn",
-		qimei36: "1e9970cbcdc20a031dee9f37100017e1840e",
-		"content-type": "application/json; charset=utf-8",
+		'user-agent': 'Dart/2.19 (dart:io)',
+		plat: 'ar',
+		channel: 'aliopen',
+		devid: '114514114514',
+		ver: '3.9.0',
+		host: 'bd-api.kuwo.cn',
+		qimei36: '1e9970cbcdc20a031dee9f37100017e1840e',
+		'content-type': 'application/json; charset=utf-8',
 	};
 	const data = JSON.stringify({
 		type: 5,
 		subType: 5,
 		musicId: 0,
-		adToken: "",
+		adToken: '',
 	});
 
 	const response = await request('POST', adurl, {
 		headers,
-		body: data
+		body: data,
 	});
-	if (typeof response.body === "object") {
-		console.log("bodian ad free response:", response.body);
+	if (typeof response.body === 'object') {
+		console.log('bodian ad free response:', response.body);
 	}
 }
 
 const track = async (id) => {
 	const headers = {
-		"user-agent": "Dart/2.19 (dart:io)",
-		plat: "ar",
-		channel: "aliopen",
-		devid: "114514114514",
-		ver: "3.9.0",
-		host: "bd-api.kuwo.cn",
-		'X-Forwarded-For': '1.0.1.114'
+		'user-agent': 'Dart/2.19 (dart:io)',
+		plat: 'ar',
+		channel: 'aliopen',
+		devid: '114514114514',
+		ver: '3.9.0',
+		host: 'bd-api.kuwo.cn',
+		'X-Forwarded-For': '1.0.1.114',
 	};
-	let audioUrl = `http://bd-api.kuwo.cn/api/play/music/v2/audioUrl?&br=${['2000kflac', '320kmp3']
+	let audioUrl = `http://bd-api.kuwo.cn/api/play/music/v2/audioUrl?&br=${[
+		'2000kflac',
+		'320kmp3',
+	]
 		.slice(select.ENABLE_FLAC ? 0 : 1)
 		.join('|')}&musicId=${id}`;
 	audioUrl = generateSign(audioUrl);
