@@ -105,13 +105,13 @@ const track = async (id) => {
 		if (response.statusCode !== 200) {
 			await sendAdFreeRequest();
 			response = await request('GET', audioUrl, { headers });
-			if (response.statusCode !== 200) insure().kuwo.track(id);
+			if (response.statusCode !== 200) ""
 		}
 		const body = await response.body();
 		const urlMatch = (body.match(/http[^\s$"]+/) || [])[0];
-		return urlMatch || insure().kuwo.track(id);
+		return urlMatch || ""
 	} catch (error) {
-		return insure().kuwo.track(id);
+		return ""
 	}
 };
 
